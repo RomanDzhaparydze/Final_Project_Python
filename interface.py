@@ -103,7 +103,7 @@ def importData(dict_by_id, list_of_person):
     import_filename = input("What is your input file name? ")
     if not os.path.exists(import_filename):
         print("Error: import file does not exist")
-        return
+        return 0
     types_of_person = [Employee, Student]
     sum_of_ages = 0
     with open(import_filename, "r") as f:
