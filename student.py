@@ -45,3 +45,8 @@ class Student(Person):
     
     def mySelfAsDict(self):
         return self.studentAsDict()
+    
+if __name__ == "__main__":
+    s = Student(1, "John", 20)
+    s.printMySelf()
+    print(s.mySelfAsDict())
