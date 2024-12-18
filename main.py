@@ -20,7 +20,7 @@ while True:
         if choise == Menu.SAVE_NEW_ENTRY.value:
             age = saveNewEntry(dict_by_id, list_of_person)
             sum_of_ages += age
-        elif choise == Menu.SEARCH_BY_ID.value:
+        elif choise == Menu.SEARCH_BY_ID.vlue:
             searchById(dict_by_id)
         elif choise == Menu.PRINT_AGES_AVERAGE.value:
             printAgesAverage(sum_of_ages, list_of_person)
@@ -32,7 +32,7 @@ while True:
             printAllEntries(list_of_person)
         elif choise == Menu.PRINT_ENTRY_BY_INDEX.value:
             printEntryByIndex(list_of_person)
-        elif choise == Menu.IMORT_DATA_FRAME.value:
+        elif choise == Menu.IMPORT_DATA_FRAME.value:
             sum_of_ages += importData(dict_by_id, list_of_person)
         elif choise == Menu.SAVE_ALL_DATA.value:
             saveAllData(list_of_person)

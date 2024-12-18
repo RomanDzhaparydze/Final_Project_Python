@@ -106,17 +106,21 @@ def importData(dict_by_id, list_of_person):
         return 0
     types_of_person = [Employee, Student]
     sum_of_ages = 0
+    imported_amount = 0
     with open(import_filename, "r") as f:
         people_df = pd.read_csv(import_filename)
-        for _, dict_to_add in people_df.iterrows():
+        for idx, dict_to_add in people_df.iterrows():
             for curr_type in types_of_person:
                 if dict_to_add["type"]== curr_type.__name__:
                     person = curr_type(dict_to_import=dict_to_add)
                     dict_by_id[person.getId()] = person
                     list_of_person.append(person)
                     sum_of_ages += person.getAge()
+                    imported_amount += 1
                     break
-                print("Invalid type of person: " + dict_to_add["type"])
+                else:
+                    print("Invalid type of person: " + dict_to_add["type"])
+    print("Succesfully imported " + str(imported_amount) + " entries")
     return sum_of_ages
 
 

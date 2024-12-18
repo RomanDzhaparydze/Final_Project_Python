@@ -1,17 +1,17 @@
 from person import Person 
+import pandas as pd
 from utils import checkParamIsNumber
 
 class Employee(Person):
     def __init__(self, id=None, name=None, age=None, dict_to_import=None):
-        if not dict_to_import:
-            super().__init__(id, name, age)
-            self._field = input("Please enter the field of work: ")
-            self._salary = checkParamIsNumber("salary")
-        else:
-            print(dict_to_import)
+        if isinstance(dict_to_import,(pd.Series, pd.DataFrame)):
             super().__init__(dict_to_import["id"], dict_to_import["name"], dict_to_import["age"])
             self._field = dict_to_import["field"]
             self._salary = dict_to_import["salary"]
+        else:
+            super().__init__(id, name, age)
+            self._field = input("Please enter the field of work: ")
+            self._salary = checkParamIsNumber("salary")
 
     def getField(self):
         return self._field
