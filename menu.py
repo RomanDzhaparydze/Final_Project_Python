@@ -8,7 +8,8 @@ class Menu(Enum):
     PRINT_ALL_IDS = 5
     PRINT_ALL_ENTRIES = 6
     PRINT_ENTRY_BY_INDEX = 7
-    SAVE_ALL_DATA = 8
-    EXIT = 9
+    IMPORT_DATA_FRAME = 8
+    SAVE_ALL_DATA = 9
+    EXIT = 10
 
 
