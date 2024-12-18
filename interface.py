@@ -3,6 +3,7 @@ from student import Student
 from employee import Employee
 from menu import Menu
 import pandas as pd
+import os
  
 def printMenu():
     idx = 1
@@ -97,6 +98,26 @@ def printEntryByIndex(list_of_person):
         printIndexErrorOutOfRange(idx, len(list_of_person))
     else:
         list_of_person[idx].printMySelf()
+
+def importData(dict_by_id, list_of_person):
+    import_filename = input("What is your input file name? ")
+    if not os.path.exists(import_filename):
+        print("Error: import file does not exist")
+        return
+    types_of_person = [Employee, Student]
+    sum_of_ages = 0
+    with open(import_filename, "r") as f:
+        people_df = pd.read_csv(import_filename)
+        for _, dict_to_add in people_df.iterrows():
+            for curr_type in types_of_person:
+                if dict_to_add["type"]== curr_type.__name__:
+                    person = curr_type(dict_to_import=dict_to_add)
+                    dict_by_id[person.getId()] = person
+                    list_of_person.append(person)
+                    sum_of_ages += person.getAge()
+                    break
+                print("Invalid type of person: " + dict_to_add["type"])
+    return sum_of_ages
 
 
 def saveAllData(list_of_person):
