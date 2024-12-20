@@ -1,12 +1,20 @@
 from person import Person
+import pandas as pd
 from utils import checkParamIsNumber
 
 class Student(Person):
-    def __init__(self, id, name, age):
-        super().__init__(id, name, age)
-        self._field = input("Please enter the field of study: ")
-        self._year = checkParamIsNumber("year of study")
-        self._avg = checkParamIsNumber("average score", float_value=True)
+    def __init__(self, id=None, name=None, age=None, dict_to_import=None):
+        if isinstance(dict_to_import,(pd.Series, pd.DataFrame)):
+            super().__init__(dict_to_import["id"], dict_to_import["name"], dict_to_import["age"])
+            self._field = dict_to_import["field"]
+            self._year = dict_to_import["year of study"]
+            self._avg = dict_to_import["average score"]
+        else:
+            super().__init__(id, name, age)
+            self._field = input("Please enter the field of study: ")
+            self._year = checkParamIsNumber("year of study")
+            self._avg = checkParamIsNumber("average score", float_value=True)
+            
     
     def getField(self):
         return self._field
@@ -41,6 +49,7 @@ class Student(Person):
         stud_dict["field"] = self.getField()
         stud_dict["year of study"] = self.getYear()
         stud_dict["average score"] = self.getAvg()
+        stud_dict["type"] = self.__class__.__name__
         return stud_dict
     
     def mySelfAsDict(self):
